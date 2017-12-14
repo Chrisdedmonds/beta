@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import datetime
-import boto
+import boto3
+#from boto.s3.key import Key
 
-s3_connection = boto.connect_s3()
+s3 = boto3.resource('s3')
+#s3_connection = boto.connect_s3()
 
 class IsplackCrawlSpider(scrapy.Spider):
     name = 'isplack-crawl'
@@ -21,11 +23,21 @@ class IsplackCrawlSpider(scrapy.Spider):
         title = title[1]
         name = 'isplack'
         date = str(datetime.date.today())
+
+        yield {
+            'titled': title
+        }
         '''
+        html_file_name = name + '-' + date + '.html'
+        html_file = open(html_file_name, 'w')
+        html_file.write(a)
+        #html_file.close()
+
+        k = Key('test-crawl')
+        k.key = html_file_name
+        k.set_contents_from_string(html_file)
+
         with open( 'repo/' + name + '_' + date + '.html', 'w') as fil:
             fil.write(a)
         fil.close()
         '''
-        yield {
-            'titled': title
-        }
