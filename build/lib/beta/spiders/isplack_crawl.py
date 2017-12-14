@@ -3,7 +3,7 @@ import scrapy
 import datetime
 import boto
 
-s3_connection = boto.connect_s3()
+#s3 = boto3.resource('s3')
 
 class IsplackCrawlSpider(scrapy.Spider):
     name = 'isplack-crawl'
