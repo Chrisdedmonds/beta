@@ -25,5 +25,5 @@ class IsplackCrawlSpider(scrapy.Spider):
         fil.close()
         '''
         yield {
-            'title': title
+            'titled': title
         }
