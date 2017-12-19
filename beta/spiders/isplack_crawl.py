@@ -32,5 +32,5 @@ class IsplackCrawlSpider(scrapy.Spider):
         yield {
             'titled': title,
             'stars': stars,
-            'reviews': reviews
+            'recent_reviews': reviews
         }
