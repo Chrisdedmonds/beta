@@ -1,16 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import datetime
-import boto3
-'''
-from boto.s3.key import Key
-
-s3 = boto3.resource('s3')
-s3_connection = boto.connect_s3()
-
-for bucket in s3.buckets.all():
-    print(bucket.name)
-'''
 
 class IsplackCrawlSpider(scrapy.Spider):
     name = 'isplack-crawl'
@@ -28,21 +18,19 @@ class IsplackCrawlSpider(scrapy.Spider):
         title = title[1]
         name = 'isplack'
         date = str(datetime.date.today())
+        stars = []
+        recent_rev = response.xpath('//div[@id="most-recent-reviews-content"]/div[@class="a-section review"]/div[@class="a-icon-row a-spacing-none"]/a/i/span/text()').extract()
+        for i in recent_rev:
+             i = i.split(' ')
+             i = i[0]
+             stars.append(i)
+        reviews = response.xpath('//div[@id="most-recent-reviews-content"]/div[@class="a-section review"]/a/span/text()').extract()
+        #reviews = recent_rev.xpath('//span[@class="a-icon-alt"]').extract()
+        #/div[@class="a-profile-content"]/span[@class="a-profile-name"]/text()').extract()
+        #reviews = recent_rev.xpath('/').extract()
 
         yield {
-            'titled': title
+            'titled': title,
+            'stars': stars,
+            'reviews': reviews
         }
-        '''
-        html_file_name = name + '-' + date + '.html'
-        html_file = open(html_file_name, 'w')
-        html_file.write(a)
-        #html_file.close()
-
-        k = Key('test-crawl')
-        k.key = html_file_name
-        k.set_contents_from_string(html_file)
-
-        with open( 'repo/' + name + '_' + date + '.html', 'w') as fil:
-            fil.write(a)
-        fil.close()
-        '''
