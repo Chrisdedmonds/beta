@@ -2,10 +2,15 @@
 import scrapy
 import datetime
 import boto3
-#from boto.s3.key import Key
+'''
+from boto.s3.key import Key
 
 s3 = boto3.resource('s3')
-#s3_connection = boto.connect_s3()
+s3_connection = boto.connect_s3()
+
+for bucket in s3.buckets.all():
+    print(bucket.name)
+'''
 
 class IsplackCrawlSpider(scrapy.Spider):
     name = 'isplack-crawl'
