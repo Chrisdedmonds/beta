@@ -28,9 +28,11 @@ class IsplackCrawlSpider(scrapy.Spider):
         #reviews = recent_rev.xpath('//span[@class="a-icon-alt"]').extract()
         #/div[@class="a-profile-content"]/span[@class="a-profile-name"]/text()').extract()
         #reviews = recent_rev.xpath('/').extract()
+        rank = response.xpath('//li[@id="SalesRank"]').extract_first().replace('\n','').replace('<b>','').replace('</b>','').split('(')[0].replace('<li id="SalesRank">','')
 
         yield {
             'titled': title,
             'stars': stars,
-            'reviews': reviews
+            'recent_reviews': reviews,
+            'rank': rank
         }

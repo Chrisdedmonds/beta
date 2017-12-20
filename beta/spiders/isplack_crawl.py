@@ -33,6 +33,15 @@ class IsplackCrawlSpider(scrapy.Spider):
         yield {
             'titled': title,
             'stars': stars,
-            'recent_reviews': reviews,
-            'rank': rank
+            'rank': rank,
+            'rec_rev-1': reviews[0],
+            'rec_rev-2': reviews[1],
+            'rec_rev-3': reviews[2],
+            'rec_rev-4': reviews[3],
+            'rec_rev-5': reviews[4],
+            'rec_rev-6': reviews[5],
+            'rec_rev-7': reviews[6],
+            'rec_rev-8': reviews[7],
+            'rec_rev-9': reviews[8],
+            'rec_rev-10': reviews[9] 
         }
